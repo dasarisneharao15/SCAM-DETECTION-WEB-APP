@@ -4,10 +4,21 @@ function App() {
 
   const [text,setText] = useState("");
   const [result,setResult] = useState("");
+  const [color,setColor] = useState("");
 
   const checkScam = () => {
 
-    const scamWords = ["lottery","otp","bank","password","prize","winner","urgent"];
+    const scamWords = [
+      "lottery",
+      "otp",
+      "bank",
+      "password",
+      "urgent",
+      "winner",
+      "click link",
+      "verify account",
+      "free money"
+    ];
 
     let score = 0;
 
@@ -19,34 +30,41 @@ function App() {
 
     if(score >= 3){
       setResult("🚨 SCAM ALERT");
+      setColor("red");
     }
     else if(score === 2){
       setResult("⚠ Suspicious");
+      setColor("orange");
     }
     else{
       setResult("✅ Safe");
+      setColor("green");
     }
 
   };
 
   return (
 
-    <div style={{textAlign:"center",marginTop:"100px"}}>
+    <div style={{textAlign:"center",marginTop:"80px"}}>
 
-      <h1>Scam Detection System</h1>
+      <h1>🔍 Scam Detection System</h1>
+
+      <p>Paste Email / Message / Website Link</p>
 
       <textarea
       rows="6"
-      cols="50"
-      placeholder="Paste email / message / URL"
+      cols="60"
+      placeholder="Example: You won a lottery click here..."
       onChange={(e)=>setText(e.target.value)}
       />
 
       <br/><br/>
 
-      <button onClick={checkScam}>Check</button>
+      <button onClick={checkScam}>
+        Check Scam
+      </button>
 
-      <h2>{result}</h2>
+      <h2 style={{color:color}}>{result}</h2>
 
     </div>
   );
